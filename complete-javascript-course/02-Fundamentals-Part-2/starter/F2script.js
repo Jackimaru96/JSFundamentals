@@ -183,3 +183,4 @@ console.log(firstPerson.getFullName() + "'s BMI (" + firstPerson.calcBMI() + ") 
 /**
  * Loops 
  * */
+console.log(`testing one two three)

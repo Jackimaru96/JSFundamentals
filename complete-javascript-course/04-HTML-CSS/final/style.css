@@ -29,6 +29,10 @@ p {
   color: red;
 }
 
+.second {
+  color: green;
+}
+
 #your-name {
   background-color: rgb(255, 220, 105);
   border: 5px solid #444;

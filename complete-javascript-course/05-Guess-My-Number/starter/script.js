@@ -27,10 +27,12 @@ document.querySelector('.again').addEventListener('click', function () {
   gameRestart = true;
   score = 20;
   correctNum = Math.trunc(Math.random() * 20) + 1;
-  document.querySelector('body').style.backgroundColor = '#000000f7';
+  document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('.number').textContent = '?';
+  document.querySelector('.guess').value = '';
   document.querySelector('.score').textContent = score;
+  displayMessage('Start guessing...');
 });
 
 if ((gameRestart = true)) {
@@ -42,30 +44,20 @@ if ((gameRestart = true)) {
     let wrongGuess = true;
 
     if (!userGuessValue) {
-      document.querySelector('.message').textContext = 'No number input 😑';
+      displayMessage('No number input 😑');
       wrongGuess = false;
     }
     // When player wins
     else if (userGuessValue === correctNum) {
-      document.querySelector('.message').textContent = 'Correct Number! 😁';
-
-      // Changing CSS Style
-      document.querySelector('body').style.backgroundColor = '#60b347db';
-      document.querySelector('.number').style.width = '30rem';
-      document.querySelector('.number').textContent = correctNum;
-
-      checkHighScore(score, highscore);
-      document.querySelector('.highscore').textContent = highscore;
-      wrongGuess = false;
-      gameRestart = false;
+      winGame();
     }
     // guess more than number
-    else if (userGuessValue > correctNum) {
-      document.querySelector('.message').textContent = 'Number is too high! ⬆️';
-    }
-    // guess less than number
-    else if (userGuessValue < correctNum) {
-      document.querySelector('.message').textContent = 'Number is too low! ⬇️';
+    else if (userGuessValue !== correctNum) {
+      displayMessage(
+        userGuessValue > correctNum
+          ? 'Number is too high! ⬆️'
+          : 'Number is too low! ⬇️'
+      );
     }
 
     if (wrongGuess) {
@@ -74,7 +66,7 @@ if ((gameRestart = true)) {
     }
 
     if (score == 0) {
-      document.querySelector('.message').textContent = 'You lose! 😢';
+      displayMessage('You lose! 😢');
       gameRestart = false;
     }
   });
@@ -84,5 +76,23 @@ function checkHighScore(currentScore, highScore) {
   if (currentScore > highScore) {
     highscore = currentScore;
   }
+}
+
+function winGame() {
+  document.querySelector('.message').textContent = 'Correct Number! 😁';
+
+  // Changing CSS Style
+  document.querySelector('body').style.backgroundColor = '#60b347db';
+  document.querySelector('.number').style.width = '30rem';
+  document.querySelector('.number').textContent = correctNum;
+
+  checkHighScore(score, highscore);
+  document.querySelector('.highscore').textContent = highscore;
+  wrongGuess = false;
+  gameRestart = false;
+}
+
+function displayMessage(message) {
+  document.querySelector('.message').textContent = message;
 }
 // Function needs to be added; this is called EventHandler

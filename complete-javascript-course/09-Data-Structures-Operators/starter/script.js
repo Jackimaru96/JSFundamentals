@@ -761,7 +761,5 @@ for (const flightDetails of flights.split('+')) {
   const newTime = time.replace(':', 'h');
   const newFrom = from.slice(0, 3).toUpperCase();
   const newTo = to.slice(0, 3).toUpperCase();
-  console.log(
-    `${newDescrip} from ${newFrom} to ${newTo} (${newTime})`.padEnd(36)
-  );
+  console.log(`${newDescrip} from ${newFrom} to ${newTo} (${newTime})`);
 }
